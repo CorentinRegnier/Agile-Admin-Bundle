@@ -1,0 +1,21 @@
+@include list-group-item-variant(primary, $list-group-primary-bg, $list-group-primary-text);
+@include list-group-item-variant(success, $list-group-success-bg, $list-group-success-text);
+@include list-group-item-variant(info, $list-group-info-bg, $list-group-info-text);
+@include list-group-item-variant(warning, $list-group-warning-bg, $list-group-warning-text);
+@include list-group-item-variant(danger, $list-group-danger-bg, $list-group-danger-text);
+@include list-group-item-variant(secondary, $list-group-secondary-bg, $list-group-secondary-text);
+@include list-group-item-variant(inverse, $list-group-inverse-bg, $list-group-inverse-text);
+
+@each $list-group, $list-group-bg, $list-group-text in
+
+    (primary,$list-group-primary-bg, $list-group-primary-text),
+    (success,$list-group-success-bg, $list-group-success-text),
+    (warning,$list-group-warning-bg, $list-group-warning-text),
+    (danger,$list-group-danger-bg, $list-group-danger-text),
+    (info,$list-group-info-bg, $list-group-info-text),
+    (secondary,$list-group-secondary-bg, $list-group-secondary-text) {
+
+        .list-group-item-#{$list-group} {
+            border-color: lighten($list-group-bg,$list-group-contextual-border-percent);
+        }
+}

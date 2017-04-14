@@ -1,0 +1,142 @@
+.panel {
+
+    &.panel-secondary {
+        border-color: $panel-secondary-border;
+
+        .panel-heading {
+            background-color: $panel-secondary-heading-bg;
+            color: $panel-secondary-text;
+            border-color: $panel-secondary-border;
+        }
+        &.inverse {
+            border: 0;
+        }
+    }
+
+    &.no-border {
+
+        &, .panel-heading {
+            border: 0;
+        }
+    }
+
+    &.inverse {
+
+        @each $panel, $panel-body-color, $panel-text-color in
+            (default, $panel-default-inverse-bg, $panel-default-inverse-text),
+            (primary,$panel-primary-inverse-bg, $panel-primary-inverse-text),
+            (success,$panel-success-inverse-bg, $panel-success-inverse-text),
+            (warning,$panel-warning-inverse-bg, $panel-warning-inverse-text),
+            (danger,$panel-danger-inverse-bg, $panel-danger-inverse-text),
+            (info,$panel-info-inverse-bg, $panel-info-inverse-text),
+            (secondary,$panel-secondary-inverse-bg, $panel-secondary-inverse-text) {
+
+                &.panel-#{$panel} {
+
+                    .panel-body {
+                        background-color: $panel-body-color;
+                        color: $panel-text-color;
+                    }
+                }
+            }
+    }
+
+    &.classic {
+        border-color: transparent;
+    }
+
+    &.classic,
+    &.outline {
+
+        .panel-heading {
+            background-color: #fff;
+        }
+
+        @each $panel, $panel-text-color in
+            (default, $panel-default-classic-text),
+            (primary, $panel-primary-classic-text),
+            (success, $panel-success-classic-text),
+            (warning, $panel-warning-classic-text),
+            (danger, $panel-danger-classic-text),
+            (info, $panel-info-classic-text),
+            (secondary, $panel-secondary-classic-text) {
+
+                &.panel-#{$panel} .panel-heading {
+                    color: $panel-text-color;
+                }
+        }
+    }
+
+    &.outline {
+
+        .panel-heading {
+            border-color: transparent;
+        }
+    }
+}
+
+.panel-heading {
+    margin: 0;
+    color: $panel-text-color;
+}
+
+.accordion {
+
+    .panel {
+        border-bottom: 0;
+
+        &:first-child .panel-heading {
+            border: 0;
+        }
+    }
+    .panel + .panel {
+        margin-top: 0;
+        border-top: 0;
+    }
+
+    .panel-heading {
+        padding: 0;
+
+        &:hover {
+            @include opacity(.8);
+        }
+    }
+
+    @each $panel, $panel-border-top-color in
+        (default, $panel-default-border),
+        (primary, $panel-primary-border),
+        (success, $panel-success-border),
+        (warning, $panel-warning-border),
+        (danger, $panel-danger-border),
+        (info, $panel-info-border),
+        (secondary, $panel-secondary-border) {
+
+            .panel-#{$panel} .panel-heading {
+                border-top: 1px solid lighten($panel-border-top-color, $panel-contextual-border-percent);
+            }
+    }
+    .panel-title {
+
+        a {
+            position: relative;
+            display: block;
+            padding: $panel-heading-padding;
+            text-decoration: none !important;
+
+            &:after {
+                content: '\f078';
+                position: absolute;
+                top: 14px;
+                right: 20px;
+                font-family: 'FontAwesome';
+                font-size: 11px;
+            }
+            &.collapsed {
+
+                &:after {
+                    content: '\f054';
+                }
+            }
+        }
+    }
+}

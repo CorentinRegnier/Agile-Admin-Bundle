@@ -1,0 +1,37 @@
+{
+  "name": "cregnier/agile-admin-bundle",
+  "description": "Agile Admin Bundle",
+  "homepage": "https://github.com/MWCorentin/Agile-Admin-Bundle",
+  "type": "symfony-bundle",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Corentin REGNIER",
+      "email": "corentin.regnier59@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "AgileAdminBundle\\":"" }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.corentinregnier.fr"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "knplabs/knp-menu-bundle": "^2.0"
+  },
+  "config": {
+    "bin-dir": "bin",
+    "process-timeout":   600,
+    "preferred-install": "dist",
+    "github-protocols":  ["https"]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0"
+    }
+  }
+}

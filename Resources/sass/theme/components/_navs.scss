@@ -1,0 +1,127 @@
+.tab-pane {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+
+    .panel-body & {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.nav-tabs,
+.nav-pills {
+
+    a {
+        color: $nav-tabs-pills-text-color;
+    }
+}
+
+.nav-tabs-justified {
+
+    > .active > a,
+    > .active > a:hover,
+    > .active > a:focus {
+        border: 1px solid $nav-tabs-justified-active-border-color;
+    }
+}
+
+.nav-tabs {
+    background-color: #fafafa;
+
+    > li {
+
+        > a {
+            border-bottom: transparent;
+            margin-bottom: 1px;
+        }
+    }
+}
+
+
+
+.nav-tabs.nav-tabs-inverse {
+    background-color: $component-active-bg;
+    border: 0 !important;
+
+    > li {
+        margin-bottom: 0;
+
+        > a {
+            margin: 0;
+            border: 0 !important;
+        }
+        &.active > a {
+            background-color: #fff !important;
+
+            &,
+            &:hover,
+            &:focus {
+                color: $text-color !important;
+                background-color: #fff !important;
+                border: 0 !important;
+            }
+        }
+    }
+}
+
+
+@each $type, $tabs-border-color, $tabs-bgcolor, $tabs-text-color in
+    (primary,$nav-tabs-border-primary,$nav-tabs-bg-primary,$nav-tabs-text-primary),
+    (success,$nav-tabs-border-success,$nav-tabs-bg-success,$nav-tabs-text-success),
+    (warning,$nav-tabs-border-warning,$nav-tabs-bg-warning,$nav-tabs-text-warning),
+    (danger,$nav-tabs-border-danger,$nav-tabs-bg-danger,$nav-tabs-text-danger),
+    (info,$nav-tabs-border-info,$nav-tabs-bg-info,$nav-tabs-text-info),
+    (secondary,$nav-tabs-border-inverse,$nav-tabs-bg-inverse,$nav-tabs-text-inverse) {
+
+    .nav-tabs.nav-tabs-#{$type} {
+        border-bottom: 1px solid $tabs-border-color;
+
+        > li {
+
+            > a {
+                border-bottom: 0;
+
+                &:hover {
+                    border-bottom-color: $tabs-border-color;
+                }
+            }
+        }
+
+        &.nav-tabs-inverse {
+            background-color: $tabs-bgcolor !important;
+
+            > li {
+
+                > a {
+                    color: $tabs-text-color;
+
+                    &:hover {
+                        background-color: #fff;
+                    }
+                }
+                > a:hover,
+                &.active > a {
+                    color: $tabs-bgcolor !important;
+                }
+            }
+        }
+    }
+    .nav-tabs-#{$type} {
+
+        > li {
+
+            &.active > a {
+
+                &,
+                &:hover,
+                &:focus {
+                    color: $tabs-text-color !important;
+                    background-color: $tabs-bgcolor !important;
+                    border: 1px solid $tabs-border-color !important;
+                }
+            }
+        }
+    }
+}
+

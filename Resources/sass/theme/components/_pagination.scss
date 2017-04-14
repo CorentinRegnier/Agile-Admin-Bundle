@@ -1,0 +1,28 @@
+.pagination {
+    margin-left: -$pagination-spaces;
+    margin-right: -$pagination-spaces;
+
+    li {
+        display: inline-block;
+    }
+    .next,
+    .previous {
+        margin-left: $pagination-spaces;
+        margin-right: $pagination-spaces;
+
+        a {
+            background-color: $pagination-arrows-bg;
+        }
+    }
+}
+
+.pager {
+
+    li {
+
+        > a:hover,
+        > a:focus {
+            color: $pagination-hover-color;
+        }
+    }
+}

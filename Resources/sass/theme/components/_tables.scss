@@ -1,0 +1,338 @@
+/* ==========================================================================
+   @/1 - Table general
+   @/2 - Datatables overwrite
+   ========================================================================== */
+
+/*
+   @/1 Table - general
+   ========================================================================== */
+
+.table {
+
+    > thead {
+        font-size: $table-head-font-size;
+
+        > tr > th {
+           border-width: 1px;
+       }
+    }
+    > tbody {
+        font-size: $table-body-font-size;
+    }
+
+    > thead > tr > th,
+    > tfoot > tr > th {
+        background-color: $table-head-bg;
+        color: $table-head-text;
+    }
+
+    .success {
+        color: $table-success-text;
+    }
+    .warning {
+        color: $table-warning-text;
+    }
+    .danger {
+        color: $table-danger-text;
+    }
+    .info {
+        color: $table-info-text;
+    }
+    .active {
+        color: $table-active-text;
+    }
+}
+
+.table-hover {
+
+    > tbody > tr:hover {
+        color: $table-hover-text;
+    }
+}
+
+.table-striped {
+    background-color: $table-bg-accent;
+
+    > tbody > tr:nth-of-type(odd) {
+        background-color: #fff;
+    }
+}
+
+@include color-table(table-primary, $table-primary-bg, $table-primary-head-bg, $table-primary-head-text-color, $table-primary-text-color);
+@include color-table(table-success, $table-success-bg, $table-success-head-bg, $table-success-head-text-color, $table-success-text-color);
+@include color-table(table-warning, $table-warning-bg, $table-warning-head-bg, $table-warning-head-text-color, $table-warning-text-color);
+@include color-table(table-danger, $table-danger-bg, $table-danger-head-bg, $table-danger-head-text-color, $table-danger-text-color);
+@include color-table(table-inverse, $table-secondary-bg, $table-secondary-head-bg, $table-secondary-head-text-color, $table-secondary-text-color);
+
+
+/*
+   @/2 - Datatables overwrite
+   ========================================================================== */
+
+.filter-table {
+    overflow-x: auto;
+    min-height: 0.01%;
+    width: 100%;
+    margin-bottom: ($line-height-computed * 0.75);
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+    .pagination {
+        margin: 0 !important;
+
+        a {
+            border: 0;
+            border-radius: 0 !important;
+        }
+        .next, .previous {
+
+            a {
+                background-color: $pagination-arrows-bg;
+                color: #fff;
+
+                &:hover,
+                &:focus {
+                    background-color: $pagination-hover-bg;
+                }
+            }
+            &.disabled {
+
+                a {
+                    background-color: $pagination-disabled-bg;
+                    color: $pagination-disabled-color;
+                }
+            }
+        }
+    }
+    .bottom {
+        padding-top: 30px;
+        overflow: hidden;
+
+        .dt-buttons {
+            margin-bottom: 15px;
+            float: none;
+        }
+        .form-control {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 12px;
+            height: 31px;
+        }
+    }
+    .btn-default {
+        text-transform: uppercase;
+        font-size: 12px;
+
+        i {
+            font-size: 16px;
+            margin-right: 8px !important;
+            vertical-align: middle;
+            color: lighten($text-color,12%);
+        }
+    }
+    .form-inline .filter-table-search-row {
+
+        .form-control {
+            width: 100%;
+            padding: 0 4px;
+            height: auto;
+            border-radius: 0;
+            @include box-shadow(none);
+        }
+    }
+}
+.filter-table-reset {
+    text-align: right;
+
+    a {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+
+        &:hover i {
+            color: darken(#9ea7b8, 10%);
+        }
+    }
+    i {
+        font-size: 18px;
+        line-height: 1em;
+        color: #9ea7b8;
+    }
+}
+
+
+.filter-table-icon-link {
+    text-transform: none !important;
+
+    i {
+        font-size: 12px;
+        margin-right: 4px;
+    }
+}
+
+
+.table.dataTable {
+    //@include box-sizing(border-box); // break table-responsive (dataTable use content-box)
+
+    &.no-footer {
+        border-bottom-color: $table-border-color;
+    }
+    &.table-bordered {
+
+        tbody {
+
+            td {
+                border-right: 0;
+            }
+        }
+    }
+
+    > thead {
+
+        tr > th {
+            vertical-align: middle;
+        }
+        th {
+            background-color: $datatable-thead-bg;
+            color: $datatable-thead-text;
+        }
+
+        .sorting,
+        .sorting_asc,
+        .sorting_desc {
+            background-image: none;
+        }
+        .sorting_asc,
+        .sorting_desc {
+            background-color: $datatable-sorting-bg;
+        }
+        th:hover {
+            //@include opacity(.8);
+            background-color: $datatable-sorting-hover-bg;
+        }
+    }
+
+    > tfoot,
+    > thead,
+    > tbody {
+
+        th, td {
+            border-top: 0;
+        }
+    }
+
+    > tbody {
+
+        > tr {
+
+            &:hover td {
+                background-color: $table-bg-hover;
+            }
+            &.even {
+
+                td {
+                    background-color: $table-bg-accent;
+                }
+            }
+        }
+        td {
+            background-color: $table-bg;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+    }
+
+    > tfoot {
+        display: table-header-group;
+
+        th {
+            vertical-align: middle;
+            background-color: $datatable-tfoot-bg;
+        }
+        input, select {
+            border-color: #fff;
+        }
+        select {
+            width: 100%;
+            font-weight: normal;
+            font-size: 12px;
+        }
+    }
+
+    td {
+        white-space: inherit !important;
+    }
+    label {
+        margin-bottom: 0;
+    }
+    a {
+        color: $datatable-link-color;
+    }
+
+}
+
+
+.dataTables_wrapper {
+
+    .dataTables_processing {
+        width: 250px !important;
+        height: 64px;
+    }
+    .dataTables_paginate {
+        float: none;
+        padding-top: 0;
+        margin-bottom: 15px;
+
+        .paginate_button {
+            background: #fff !important;
+            border: 0 !important;
+            outline: none !important;
+            @include box-shadow(none !important);
+            padding: 0;
+            margin-left: 4px;
+        }
+    }
+    .dataTables_length {
+        float: none;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+
+        label {
+            color: $text-color;
+            font-size: 12px;
+        }
+        select {
+            margin-left: 4px;
+        }
+    }
+}
+
+
+@media (max-width: $screen-tablet - 1) {
+
+    .filter-table .bottom .dt-buttons {
+        text-align: center;
+    }
+}
+
+@media (min-width: $screen-tablet) and (max-width: $screen-desktop - 1) {
+
+    .filter-table .bottom .dt-buttons {
+        text-align: right;
+    }
+}
+
+@media (max-width: $screen-desktop - 1) {
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        text-align: center;
+    }
+
+    .filter-table .bottom .dt-buttons {
+        width: 100%;
+
+        &.btn-group > .btn {
+            float: none;
+        }
+    }
+}

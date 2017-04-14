@@ -1,0 +1,38 @@
+@each $heading in (h1,h2,h3,h4,h5,h6) {
+
+    #{$heading}, .#{$heading} {
+        margin-top: 0;
+    }
+}
+
+@each $heading in (h1,'.h1',h2,'.h2',h3,'.h3') {
+
+    #{$heading} {
+        margin-bottom: 15px;
+    }
+}
+
+.page-header {
+    margin-top: 0;
+
+    &.inverse {
+        border-color: $page-header-inverse-border-color;
+    }
+}
+
+hr.inverse {
+    border-color: $hr-inverse-border;
+}
+
+.text-brand {
+    color: $brand-color;
+}
+
+.well {
+    @include box-shadow(none);
+}
+
+.badge.inverse {
+    background-color: #fff;
+    color: $text-color;
+}

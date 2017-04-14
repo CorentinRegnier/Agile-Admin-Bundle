@@ -1,0 +1,11 @@
+.dropdown-menu {
+    margin-top: 1px;
+
+    > li {
+
+        > a {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}

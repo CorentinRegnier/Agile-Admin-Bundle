@@ -1,0 +1,35 @@
+//== spacers
+@each $property in (top, bottom, right, left) {
+    @include loop-block-spaces(margin, $property, 35);
+    @include loop-block-spaces(padding, $property, 35);
+}
+
+//== Contextual backgrounds
+@include bg-variant('.bg-default', $bg-default-bg);
+@include bg-variant('.bg-secondary', $brand-secondary);
+
+@each $bg, $bg-body-color, $bg-text-color, $bg-text-color-hover in
+    (default,$bg-default-bg, $bg-default-text, $bg-default-text-hover),
+    (primary,$bg-primary-bg, $bg-primary-text, $bg-primary-text-hover),
+    (success,$bg-success-bg, $bg-success-text, $bg-success-text-hover),
+    (warning,$bg-warning-bg, $bg-warning-text, $bg-warning-text-hover),
+    (danger,$bg-danger-bg, $bg-danger-text, $bg-danger-text-hover),
+    (info,$bg-info-bg, $bg-info-text, $bg-info-text-hover),
+    (secondary,$bg-secondary-bg, $bg-secondary-text, $bg-secondary-text-hover) {
+
+        &.bg-#{$bg} {
+            padding: $contextual-padding;
+            color: $bg-text-color;
+        }
+        a.bg-#{$bg} {
+            display: inline-block;
+            padding: $contextual-link-padding;
+            color: $bg-text-color;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                color: $bg-text-color-hover;
+            }
+        }
+}

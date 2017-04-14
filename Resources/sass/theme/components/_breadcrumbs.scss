@@ -1,0 +1,14 @@
+.breadcrumb {
+    padding: $breadcrumb-padding-vertical 0;
+
+    &.inverse {
+        padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
+    }
+    a {
+        color: $breadcrumb-color;
+    }
+
+    > li + li:before {
+        font-family: 'FontAwesome';
+    }
+}

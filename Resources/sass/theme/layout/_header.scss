@@ -1,0 +1,270 @@
+#header {
+    position: fixed;
+    z-index: $zindex-navbar;
+    @include size(100%,$aside-menu-height);
+    padding: 0 15px 0 0;
+    background-color: $header-bg;
+    @include box-shadow(2px 0px 3px rgba(0, 0, 0, 0.5));
+    @include clearfix();
+}
+
+/*
+   Header logo
+   ========================================================================== */
+
+.header-logo {
+    display: block;
+    float: left;
+    width: $aside-menu-expanded-width;
+    min-height: 66px;
+    font-size: $font-size-brand;
+    color: $header-logo-color;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 63px;
+    text-decoration: none;
+
+    span {
+        display: inline-block;
+        padding-left: 20px;
+    }
+    img {
+        vertical-align: top;
+    }
+}
+
+
+
+
+/*
+   Header toggle aside menu
+   ========================================================================== */
+
+.header-toggle-aside-menu {
+    display: block;
+    float: left;
+    padding: 0;
+    margin: 9px 0 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 46px;
+    color: $header-toggle-aside-menu-color !important;
+}
+
+/*
+   Header searchbar
+   ========================================================================== */
+
+.header-searchbar {
+    position: relative;
+    float: left;
+    width: 162px;
+    margin: 16px 0 0 20px;
+    font-size: 13px;
+    line-height: 25px;
+    @include transition(all .5s ease);
+
+    input {
+        padding: 6px 26px 6px 12px;
+        border: 0;
+        border-radius: 0;
+        background-color: $header-searchbar-input-bg;
+        color: $header-searchbar-color;
+        @include placeholder($header-searchbar-placeholder-color);
+
+        &:focus {
+            @include box-shadow(none);
+            border-color: transparent;
+        }
+    }
+    span {
+        display: block;
+        @include size(28px, 34px);
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: center;
+    }
+    i {
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 34px;
+        color: $header-searchbar-placeholder-color;
+
+        &:hover {
+            color: $header-searchbar-color;
+        }
+    }
+}
+
+
+/*
+   Header user container
+   ========================================================================== */
+
+.header-user {
+    float: right;
+}
+
+
+/*
+   Header user dropdown
+   ========================================================================== */
+
+.header-user-dropdown {
+    position: relative;
+    float: right;
+    display: table;
+    vertical-align: middle;
+    height: $aside-menu-height;
+    border: 0;
+    @include transition(all .15s ease-in-out);
+
+    .dropdown-toggle {
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+
+        img {
+            border-radius: 20px;
+        }
+        span {
+            display: inline-block;
+            max-width: 124px;
+            vertical-align: middle;
+            margin: 0 10px;
+            color: $header-user-dropdown-text-color;
+        }
+        i {
+            color: $header-user-dropdown-icon-color;
+            vertical-align: text-bottom;
+        }
+    }
+}
+
+.header-user-dropdown-menu {
+    left: auto;
+    right: 0;
+    border-radius: 0;
+    border-color: #fff;
+
+    &:before {
+        content: '';
+        @include square(0);
+        position: absolute;
+        top: -11px;
+        right: 13px;
+        border-style: solid;
+        border-width: 0 8px 10px 8px;
+        border-color: transparent transparent #fff transparent;
+    }
+
+    > li {
+        margin: 0 5px;
+
+        > a {
+            padding: 5px;
+
+            &:hover,
+            &:focus {
+                background-color: $header-user-dropdown-menu-bg;
+                color: $header-user-dropdown-menu-color;
+            }
+
+            i {
+                margin-right: 8px;
+            }
+        }
+    }
+}
+
+
+
+/*
+   Header notifications
+   ========================================================================== */
+
+.header-user-notification {
+    display: inline-block;
+    float: left;
+    padding-top: 25px;
+    margin-right: 10px;
+
+    a {
+        position: relative;
+        margin-right: 25px;
+
+        &, i {
+            color: $header-user-notification-icons-color;
+        }
+        i {
+            font-size: 14px;
+        }
+
+        @include header-user-notification(notif, $header-user-notification-notif);
+        @include header-user-notification(msg, $header-user-notification-msg);
+    }
+}
+.header-notification-badge {
+    display: inline-block;
+    min-width: 16px;
+    padding: 2px 4px;
+    position: absolute;
+    z-index: $zindex-popover;
+    top: -8px;
+    right: -12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 12px;
+
+}
+.header-notification-ring {
+    position: absolute;
+    top: -18px;
+    right: -21px;
+    @include square(46px);
+    border: 1px solid transparent;
+    border-radius: 100px;
+    @include animation(pulsate 7s ease-out);
+    @include animation-iteration-count(infinite);
+    @include opacity(0);
+}
+
+@-webkit-keyframes pulsate {
+
+    30% {
+        @include scale(0.1, 0.1);
+        @include opacity(0);
+    }
+    35% {
+        @include opacity(1);
+    }
+    40% {
+        @include scale(1.2, 1.2);
+        @include opacity(0);
+    }
+}
+
+
+
+/*
+   Responsive
+   ========================================================================== */
+
+@media (max-width: $screen-phone - 1) {
+
+    .header-user-notification {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: $screen-tablet - 1) {
+
+    .header-logo {
+        display: none;
+    }
+    .header-searchbar {
+        display: none;
+    }
+}
