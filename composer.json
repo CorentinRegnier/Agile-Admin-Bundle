@@ -11,7 +11,9 @@
     }
   ],
   "autoload": {
-    "psr-4": { "AgileAdminBundle\\":"" }
+    "psr-4": {
+      "AgileAdminBundle\\": ""
+    }
   },
   "repositories": [
     {
@@ -25,9 +27,11 @@
   },
   "config": {
     "bin-dir": "bin",
-    "process-timeout":   600,
+    "process-timeout": 600,
     "preferred-install": "dist",
-    "github-protocols":  ["https"]
+    "github-protocols": [
+      "https"
+    ]
   },
   "extra": {
     "branch-alias": {

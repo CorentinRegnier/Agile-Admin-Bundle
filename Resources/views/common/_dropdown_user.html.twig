@@ -1,0 +1,54 @@
+<li class="dropdown user user-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        {% if app.user.avatar is defined %}
+            <img src="{{ asset('bundles/agileadmin/images/avatar.png') }}"
+                 class="user-image"
+                 alt="User Image">
+        {% endif %}
+        {% if app.user.lastName is defined and app.user.firstName is defined %}
+            <span class="hidden-xs">Alexander Pierce</span>
+        {% endif %}
+    </a>
+    <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+            {% if app.user.avatar is defined %}
+                <img src="{{ asset('bundles/agileadmin/images/avatar.png') }}"
+                     class="img-circle" alt="User Image">
+            {% endif %}
+
+            <p>
+                {% if app.user.lastName is defined and app.user.firstName is defined %}
+                    Alexander Pierce - Web Developer
+                {% endif %}
+                {% if app.user.createdAt is defined %}
+                    <small>Member since Nov. 2012</small>
+                {% endif %}
+            </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+            <div class="row">
+                <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Profile</a>
+            </div>
+            <div class="pull-right">
+                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+            </div>
+        </li>
+    </ul>
+</li>

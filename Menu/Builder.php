@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartAdminBundle\Menu;
+namespace AgileAdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -26,7 +26,7 @@ class Builder implements ContainerAwareInterface
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
-        $this->addItem($menu, 'nav.admin.title', 'admin', 'home');
+        $this->addItem($menu, 'admin.nav.title', 'admin_homepage', 'home');
 
         return $menu;
     }

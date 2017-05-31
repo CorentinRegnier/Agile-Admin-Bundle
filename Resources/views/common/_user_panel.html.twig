@@ -1,0 +1,19 @@
+<div class="user-panel">
+    {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if app.user.avatar is defined %}
+            <div class="pull-left image">
+                <img src="{{ asset('bundles/agileadmin/images/avatar.png') }}" class="img-circle"
+                     alt="User Image">
+            </div>
+        {% endif %}
+        <div class="pull-left info">
+            {% if app.user.lastName is defined and app.user.firstName is defined %}
+                <p>{{ app.user.firstName }} {{ app.user.lastName }}</p>
+            {% endif %}
+            <a href="#">
+                <i class="fa fa-circle text-success"></i>
+                {% block text_online %}Online{% endblock text_online %}
+            </a>
+        </div>
+    {% endif %}
+</div>

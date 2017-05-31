@@ -1,109 +1,349 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ smart.project_title }}{% endblock %}</title>
+    <title>{% block title %}{{ agile.project_title }} Admin{% endblock title %}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Admin">
-    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/png">
+    <!-- Theme style -->
     {% block stylesheets %}
         {% block stylesheets_lib %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         {% endblock %}
-
-        {% for src in get_css_includes() %}
-            <link href="{{ src }}" rel="stylesheet">
-        {% endfor %}
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     {% endblock %}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/ico">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
-<body class="menu-expanded">
-<main id="main">
-    {% block aside_menu %}
-        <aside id="aside-menu">
-            <div class="aside-menu-title">Menu</div>
-            {% block aside_menu_content %}
-                {{ knp_menu_render('SmartAdminBundle:Builder:mainMenu', {'template': '@SmartAdmin/menu/main.html.twig', 'currentClass': 'active current'}) }}
-            {% endblock %}
-        </aside>
-    {% endblock %}
+<body class="hold-transition {% block color_theme %}skin-black{% endblock color_theme %} sidebar-mini">
+<div class="wrapper">
 
-    {% block header %}
-        <header id="header">
-            <a href="#" class="header-logo clearfix">
-                {% block brand_name %}{{ smart.project_title }} Admin{% endblock %}
-            </a>
-            <a href="#" class="header-toggle-aside-menu ion-navicon">
-                <i class="fa fa-bars"></i>
-            </a>
-            {% block header_searchbar %}{% endblock %}
+    <header class="main-header">
 
-            <div class="header-user">
-                {% block header_user_notification %}{% endblock %}
-                {% block header_user_dropdown %}
-                    <div class="header-user-dropdown dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <img class="img-circle" src="{{ asset('bundles/smartadmin/images/avatar.jpg') }}"
-                                 alt="Admin"/>
-                            {% block display_name %}     
-                                {% if app.user is not empty and app.user.firstname is defined and app.user.firstname is defined %}
-                                    <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
-                                {% else %}
-                                    Administrateur
-                                {% endif %}
-                            {% endblock display_name %}
-                            <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="header-user-dropdown-menu dropdown-menu">
+        {% block logo %}
+            {% include '@AgileAdmin/common/_logo.html.twig' %}
+        {% endblock logo %}
+
+        {% block navbar_top %}
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        {% block dropdown_message %}
+                            {% include '@AgileAdmin/common/_dropdown_message.html.twig' %}
+                        {% endblock dropdown_message %}
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        {% block dropdown_notification %}
+                            {% include '@AgileAdmin/common/_dropdown_notification.html.twig' %}
+                        {% endblock dropdown_notification %}
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        {% block dropdown_task %}
+                            {% include '@AgileAdmin/common/_dropdown_task.html.twig' %}
+                        {% endblock dropdown_task %}
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        {% block dropdown_user %}
+                            {% include '@AgileAdmin/common/_dropdown_user.html.twig' %}
+                        {% endblock dropdown_user %}
+                        <!-- Control Sidebar Toggle Button -->
+                        {% block control_sidebar_link %}
                             <li>
-                                <a href="{{ path('homepage') }}">
-                                    <i class="fa fa-undo"></i>Retour sur le site</a>
+                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
-                            {% if app.user is not empty and route_exist(smart.logout_route) %}
-                                <li>
-                                    <a href="{{ path(smart.logout_route) }}">
-                                        <i class="fa fa-sign-out"></i>Déconnexion</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                {% endblock %}
-            </div>
-        </header>
-    {% endblock %}
+                        {% endblock control_sidebar_link %}
+                    </ul>
+                </div>
+            </nav>
+        {% endblock navbar_top %}
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        {% block aside_main_sidebar %}
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                {% block user_panel %}
+                    {% include '@AgileAdmin/common/_user_panel.html.twig' %}
+                {% endblock user_panel %}
+                <!-- search form -->
+                {% block search_form %}
+                    {% include '@AgileAdmin/common/_search_form.html.twig' %}
+                {% endblock search_form %}
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                {% block menu %}
+                    <ul class="sidebar-menu">
+                        <li class="header">
+                            {% block menu_title %}MAIN NAVIGATION{% endblock menu_title %}
+                        </li>
+                        {% block menu_content %}
+                            {{ knp_menu_render('AgileAdminBundle:Builder:mainMenu', {'template': '@AgileAdmin/menu/main.html.twig', 'currentClass': 'active current'}) }}
+                        {% endblock menu_content %}
+                    </ul>
+                {% endblock menu %}
+            </section>
+            <!-- /.sidebar -->
+        {% endblock aside_main_sidebar %}
+    </aside>
 
-    <div id="container">
-        {% block flash_message %}
-            {% include '@SmartAdmin/common/_flash.html.twig' %}
-        {% endblock %}
-        {% block container_before %}{% endblock %}
-        <div class="content">
-            {% block content %}{% endblock %}
-        </div>
-        {% block container_after %}{% endblock %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        {% block content_wrapper %}
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                {% block content_header %}
+                    {% block title_content_header %}
+                        <h1>
+                            Dashboard
+                            <small>Version 2.0</small>
+                        </h1>
+                    {% endblock title_content_header %}
+                    {% block breadcrumb %}
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    {% endblock breadcrumb %}
+                {% endblock content_header %}
+            </section>
 
-        {% block footer %}{% endblock %}
+            <!-- Main content -->
+            <section class="content">
+                {% block content %}
+                {% endblock content %}
+            </section>
+            <!-- /.content -->
+        {% endblock content_wrapper %}
     </div>
-</main>
 
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        {% block main_footer %}
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.12
+            </div>
+            <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed
+                    Studio</a>.</strong> All rights
+            reserved.
+        {% endblock main_footer %}
+    </footer>
+
+    {% block control_sidebar %}
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-user bg-yellow"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                    <p>New phone +1(800)555-1234</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                                    <p>nora@example.com</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                                    <p>Execution time 5 seconds</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Custom Template Design
+                                    <span class="label label-danger pull-right">70%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Update Resume
+                                    <span class="label label-success pull-right">95%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Laravel Integration
+                                    <span class="label label-warning pull-right">50%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Back End Framework
+                                    <span class="label label-primary pull-right">68%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                </div>
+                <!-- /.tab-pane -->
+
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">General Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Report panel usage
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Some information about this general settings option
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Allow mail redirect
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Other sets of options are available
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Expose author name in posts
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Allow the user to show his name in blog posts
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Show me as online
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Turn off notifications
+                                <input type="checkbox" class="pull-right">
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Delete chat history
+                                <a href="javascript:void(0)" class="text-red pull-right"><i
+                                            class="fa fa-trash-o"></i></a>
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+    {% endblock control_sidebar %}
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    {% block control_sidebar_bg %}
+        <div class="control-sidebar-bg"></div>
+    {% endblock control_sidebar_bg %}
+</div>
+<!-- AdminLTE App -->
 <script src="{{ asset('js/admin.min.js') }}"></script>
-<script src="{{ asset('bundles/smartadmin/js/admin-theme.js') }}"></script>
-
-<!--[if lt IE 9]>
-<script src="{{ asset('js/respond.min.js') }}"></script>
-<![endif]-->
-<!--[if lt IE 10]>
-<script src="{{ asset('js/jquery.placeholder.min.js') }}"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $('input, textarea').placeholder();
-    });
-</script>
-<![endif]-->
-
-{% include 'SmartCoreBundle:asset:javascripts.html.twig' %}
-{% block view_js %}{% endblock %}
+{% block view_js %}{% endblock view_js %}
 </body>
 </html>
