@@ -68,7 +68,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="admin_homepage")
-     * @Method({"GETROLE_SUPER_ADMIN"})
+     * @Method({"GET"})
      *
      * @return Response
      */
@@ -126,5 +126,5 @@ assets:
 
 ```yaml
 access_control:
-    - { path: ^/admin$, roles: YOUR_ROLE }
+    - { path: ^/admin, roles: YOUR_ROLE_ADMIN }
 ```   
