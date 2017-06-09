@@ -109,10 +109,11 @@
         <a href="{{ item.uri }}" class="media" {{ knp_menu.attributes(item.linkAttributes) }}>
             <i class="{{ item.attribute('icon') }}"></i>
             <span>{{ block('label') }}</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-
+            {% if item.children is not empty %}
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            {% endif %}
         </a>
     {% else %}
         <a href="{{ item.uri }}" {{ knp_menu.attributes(item.linkAttributes) }}>{{ block('label') }}</a>

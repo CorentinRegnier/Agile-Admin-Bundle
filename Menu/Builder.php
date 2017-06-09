@@ -19,14 +19,31 @@ class Builder implements ContainerAwareInterface
 
     /**
      * @param FactoryInterface $factory
-     * @param array            $options
      *
      * @return ItemInterface
      */
-    public function mainMenu(FactoryInterface $factory, array $options)
+    public function mainMenu(FactoryInterface $factory)
     {
         $menu = $factory->createItem('root');
+        /** @var Request $request */
+        $request   = $this->getRequest();
+        $routeName = $request->get('_route');
         $this->addItem($menu, 'admin.nav.title', 'admin_homepage', 'home');
+
+        return $menu;
+    }
+
+    /**
+     * @param FactoryInterface $factory
+     *
+     * @return ItemInterface
+     */
+    public function breadcrumb(FactoryInterface $factory)
+    {
+        /** @var Request $request */
+        $request   = $this->getRequest();
+        $routeName = $request->get('_route');
+        $menu      = $factory->createItem('root');
 
         return $menu;
     }
@@ -76,6 +93,32 @@ class Builder implements ContainerAwareInterface
         }
 
         return $item;
+    }
+
+    /**
+     * @param               $prefix
+     * @param ItemInterface $menuItem
+     * @param               $route
+     * @param               $label
+     * @param null          $icon
+     * @param array         $routeParameters
+     *
+     * @return bool|ItemInterface
+     */
+    public function addItemIfRouteMatch(
+        $prefix,
+        ItemInterface $menuItem,
+        $route,
+        $label,
+        $icon = null,
+        $routeParameters = []
+    ) {
+        $routeName = $this->getRequest()->get('_route');
+        if (strpos($routeName, $prefix) === 0) {
+            $menuItem = $this->addItem($menuItem, $label, $route, $icon, $routeParameters);
+        }
+
+        return $menuItem;
     }
 
     /**

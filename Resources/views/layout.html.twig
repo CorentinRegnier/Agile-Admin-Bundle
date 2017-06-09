@@ -116,10 +116,7 @@
                         </h1>
                     {% endblock title_content_header %}
                     {% block breadcrumb %}
-                        <ol class="breadcrumb">
-                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                            <li class="active">Dashboard</li>
-                        </ol>
+                        {{ knp_menu_render('@AgileAdminBundle:AdminBuilder:breadcrumb', {'template': '@AgileAdmin/menu/main.html.twig', 'currentClass': 'active current'}) }}
                     {% endblock breadcrumb %}
                 {% endblock content_header %}
             </section>
