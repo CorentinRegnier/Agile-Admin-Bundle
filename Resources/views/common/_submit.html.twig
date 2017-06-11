@@ -1,0 +1,9 @@
+{% macro button(route) %}
+    <a href="{{ route }}" class="btn btn-default btn-sm"
+       onclick="return confirm('{{ 'common.button.back_without_save'|trans }}')">
+        <i class="fa fa-arrow-left"></i> {{ 'common.button.back'|trans }}
+    </a>
+    <button type="submit" class="btn btn-primary btn-sm pull-right" name="submit">
+        {{ 'common.button.save'|trans }}
+    </button>
+{% endmacro %}

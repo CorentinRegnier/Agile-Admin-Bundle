@@ -106,7 +106,7 @@
 {% block linkElement %}
     {% import _self as knp_menu %}
     {%- if item.extra('title') == true %}
-        <a href="{{ item.uri }}" class="media" {{ knp_menu.attributes(item.linkAttributes) }}>
+        <a href="{{ item.uri }}" {{ knp_menu.attributes(item.linkAttributes) }}>
             <i class="{{ item.attribute('icon') }}"></i>
             <span>{{ block('label') }}</span>
             {% if item.children is not empty %}
@@ -121,10 +121,14 @@
 {% endblock %}
 
 {% block spanElement %}{% import _self as knp_menu %}
-    <a href="#" class="media">
-        <span class="media-left"><i class="{{ item.attribute('icon') }}"></i></span>
-        <span class="media-body">{{ block('label') }}</span>
-        <span class="media-right"><i class="fa fa-angle-down"></i></span>
+    <a href="#">
+        <i class="{{ item.attribute('icon') }}"></i>
+        <span>{{ block('label') }}</span>
+        {% if item.children is not empty %}
+            <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        {% endif %}
     </a>
 {% endblock %}
 
