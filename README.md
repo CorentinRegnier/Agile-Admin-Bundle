@@ -128,3 +128,13 @@ assets:
 access_control:
     - { path: ^/admin, roles: YOUR_ROLE_ADMIN }
 ```   
+
+- Create in view a layout which extend to admin theme
+```twig
+{% extends 'AgileAdminBundle::layout.html.twig' %}
+```  
+
+- If you want to use the default form_theme include in your view
+```twig
+{% form_theme form 'AgileAdminBundle:form:theme.html.twig' %}
+```
