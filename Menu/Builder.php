@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Agile Admin Bundle Project.
+ *
+ * (c) Corentin Régnier <corentin.regnier59@gmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AgileAdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -22,7 +31,7 @@ class Builder implements ContainerAwareInterface
      *
      * @return ItemInterface
      */
-    public function mainMenu(FactoryInterface $factory)
+    public function mainMenu(FactoryInterface $factory, $options)
     {
         $menu = $factory->createItem('root');
         /** @var Request $request */
@@ -93,32 +102,6 @@ class Builder implements ContainerAwareInterface
         }
 
         return $item;
-    }
-
-    /**
-     * @param               $prefix
-     * @param ItemInterface $menuItem
-     * @param               $route
-     * @param               $label
-     * @param null          $icon
-     * @param array         $routeParameters
-     *
-     * @return bool|ItemInterface
-     */
-    public function addItemIfRouteMatch(
-        $prefix,
-        ItemInterface $menuItem,
-        $route,
-        $label,
-        $icon = null,
-        $routeParameters = []
-    ) {
-        $routeName = $this->getRequest()->get('_route');
-        if (strpos($routeName, $prefix) === 0) {
-            $menuItem = $this->addItem($menuItem, $label, $route, $icon, $routeParameters);
-        }
-
-        return $menuItem;
     }
 
     /**
