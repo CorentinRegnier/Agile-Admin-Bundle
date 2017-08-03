@@ -1,0 +1,11 @@
+common:
+    back: Annuler
+    submit:
+        back_without_save: Retourner à la liste
+        back: Retour
+        save: Sauvegarder
+        save_edit: Sauvegarder et rester
+        save_new: Sauvegarder et nouveau
+
+admin:
+    title: Admin
